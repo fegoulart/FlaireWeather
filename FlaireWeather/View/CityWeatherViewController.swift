@@ -5,16 +5,22 @@
 //  Copyright © 2022 Leapi. All rights reserved.
 //
 
-
 import UIKit
+import SwiftUI
 
 class CityWeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = UIView()
-        view.backgroundColor = .white
-        self.view = view
+        view = CityWeatherUIView()
+    }
+}
+
+struct CityWeatherViewControllerPreviews: PreviewProvider {
+    static var previews: some View {
+        ViewControllerPreview {
+            CityWeatherViewController()
+        }
     }
 }
 
