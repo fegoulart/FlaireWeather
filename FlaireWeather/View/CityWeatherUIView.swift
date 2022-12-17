@@ -19,13 +19,6 @@ public final class CityWeatherUIView: UIView {
         return bounds.size.height
     }
 
-//    lazy var refreshControl: UIRefreshControl = {
-//        let control = UIRefreshControl()
-//        control.translatesAutoresizingMaskIntoConstraints = false
-//        control.isUserInteractionEnabled = true
-//        return control
-//    }()
-
     var refreshControl: UIRefreshControl
 
     lazy var scrollView: UIScrollView = {
@@ -43,7 +36,7 @@ public final class CityWeatherUIView: UIView {
 
     lazy var errorViewLabel: UILabel = {
         let label = UILabel()
-        label.text = "Internet connection not available becaus an alien arrived in earth and then ate all cables and antennas"
+        label.text = ""
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
@@ -64,7 +57,7 @@ public final class CityWeatherUIView: UIView {
 
     lazy var cityNameUILabel: UILabel = {
         let label = UILabel()
-        label.text = "Toronto"
+        label.text = ""
         label.contentMode = .bottom
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 40)
@@ -90,7 +83,7 @@ public final class CityWeatherUIView: UIView {
 
     lazy var temperature: UILabel = {
         let label = UILabel()
-        label.text = "16º"
+        label.text = ""
         label.contentMode = .bottom
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 40)
@@ -100,7 +93,7 @@ public final class CityWeatherUIView: UIView {
 
     lazy var statusUILabel: UILabel = {
         let label = UILabel()
-        label.text = "Light Cloud"
+        label.text = ""
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 12)
         label.adjustsFontSizeToFitWidth = true
@@ -110,7 +103,7 @@ public final class CityWeatherUIView: UIView {
 
     lazy var lowHighUILabel: UILabel = {
         let label = UILabel()
-        label.text = "L: 11º H: 17º"
+        label.text = ""
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true

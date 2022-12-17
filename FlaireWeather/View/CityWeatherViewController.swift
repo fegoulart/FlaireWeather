@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-public final class CityWeatherViewController: UIViewController {
+public final class CityWeatherViewController: UIViewController, SkeletonDisplayable {
 
     var selectedCityId: Int
     public var weatherView: CityWeatherUIView
@@ -29,6 +29,7 @@ public final class CityWeatherViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         view = weatherView
+        showSkeleton()
         refreshControl.didPullToRefresh()
     }
 }
@@ -44,10 +45,14 @@ public final class CityWeatherRefreshControl: UIRefreshControl, WeatherLoadingVi
         case true:
             DispatchQueue.main.async {
                 self.beginRefreshing()
+                guard let viewController: CityWeatherViewController = self.findViewController() as? CityWeatherViewController else { return }
+                viewController.showSkeleton()
             }
         case false:
             DispatchQueue.main.async {
                 self.endRefreshing()
+                guard let viewController: CityWeatherViewController = self.findViewController() as? CityWeatherViewController else { return }
+                viewController.hideSkeleton()
             }
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 extension CityWeatherViewController: WeatherView {
     public func display(_ viewModel: WeatherViewModel) {
@@ -13,6 +14,7 @@ extension CityWeatherViewController: WeatherView {
         weatherView.temperature.text = viewModel.temperature
         weatherView.lowHighUILabel.text = viewModel.minMax
         weatherView.statusUILabel.text = viewModel.state
+        weatherView.weatherStatus.kf.setImage(with: viewModel.stateImgUrl)
     }
 }
 
