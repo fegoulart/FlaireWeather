@@ -14,7 +14,7 @@ public final class CityWeatherViewController: UIViewController {
     public var weatherView: CityWeatherUIView
     public var refreshControl: CityWeatherRefreshControl
 
-    public init(selectedCityId: Int = 4118, refreshControl: CityWeatherRefreshControl = CityWeatherRefreshControl()) {
+    public init(selectedCityId: Int = 4418, refreshControl: CityWeatherRefreshControl = CityWeatherRefreshControl()) {
         self.selectedCityId = selectedCityId
         self.refreshControl = refreshControl
         refreshControl.selectedCityId = selectedCityId
@@ -42,9 +42,13 @@ public final class CityWeatherRefreshControl: UIRefreshControl, WeatherLoadingVi
     public func display(_ viewModel: WeatherLoadingViewModel) {
         switch viewModel.isLoading {
         case true:
-            self.beginRefreshing()
+            DispatchQueue.main.async {
+                self.beginRefreshing()
+            }
         case false:
-            self.endRefreshing()
+            DispatchQueue.main.async {
+                self.endRefreshing()
+            }
         }
     }
 

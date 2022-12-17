@@ -39,14 +39,16 @@ final class FlaireWeatherIntegrationTests: XCTestCase {
     }
 
     private class LoaderSpy: WeatherLoader {
+
         var completions: [(Result<FlaireWeather.CityWeather, FlaireWeather.WeatherLoaderError>) -> Void] = []
 
         var loadCallCount: Int {
             return completions.count
         }
 
-        func fetchWeather(for cityId: Int, completion: @escaping (Result<FlaireWeather.CityWeather, FlaireWeather.WeatherLoaderError>) -> Void) {
+        func fetchWeather(for cityId: Int, completion: @escaping (WeatherLoader.Result) -> Void) -> FlaireWeather.WeatherLoaderTask? {
             completions.append(completion)
+            return nil
         }
 
         init() {

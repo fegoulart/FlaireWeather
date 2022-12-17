@@ -10,8 +10,14 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let url = "https://cdn.faire.com/static/mobile-take-home"
+
+    private lazy var httpClient: HTTPClient = {
+        URLSessionHTTPClient(session: URLSession(configuration: .ephemeral))
+    }()
+
     lazy var navigationController =  {
-        return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader()))
+        return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient)))
     }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

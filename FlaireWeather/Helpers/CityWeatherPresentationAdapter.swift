@@ -22,7 +22,7 @@ final public class CityWeatherPresentationAdapter: CityWeatherDelegate {
 
     public func didRequestWeather(for cityId: Int) {
         cityWeatherPresenter.didStartLoading()
-        weatherLoader.fetchWeather(for: cityId) { [weak self] result in
+        _ = weatherLoader.fetchWeather(for: cityId) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let weather):

@@ -35,6 +35,12 @@
 		6CB5B66C294E448000FECA02 /* WeakRefVirtualProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B66B294E448000FECA02 /* WeakRefVirtualProxy.swift */; };
 		6CB5B66E294E4F4300FECA02 /* CityWeatherUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B66D294E4F4300FECA02 /* CityWeatherUIComposer.swift */; };
 		6CB5B670294E5AC200FECA02 /* CityWeatherUIView+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B66F294E5AC200FECA02 /* CityWeatherUIView+Views.swift */; };
+		6CB5B673294E65C300FECA02 /* RemoteWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B672294E65C300FECA02 /* RemoteWeather.swift */; };
+		6CB5B675294E687400FECA02 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B674294E687400FECA02 /* HTTPClient.swift */; };
+		6CB5B677294E68C700FECA02 /* RemoteWeatherLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B676294E68C700FECA02 /* RemoteWeatherLoader.swift */; };
+		6CB5B679294E7B5D00FECA02 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B678294E7B5D00FECA02 /* URLSessionHTTPClient.swift */; };
+		6CB5B67B294E7BC600FECA02 /* URLSession+Sync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B67A294E7BC600FECA02 /* URLSession+Sync.swift */; };
+		6CB5B67E294E7E5800FECA02 /* HTTPUrlResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB5B67D294E7E5800FECA02 /* HTTPUrlResponse+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +85,12 @@
 		6CB5B66B294E448000FECA02 /* WeakRefVirtualProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakRefVirtualProxy.swift; sourceTree = "<group>"; };
 		6CB5B66D294E4F4300FECA02 /* CityWeatherUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeatherUIComposer.swift; sourceTree = "<group>"; };
 		6CB5B66F294E5AC200FECA02 /* CityWeatherUIView+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CityWeatherUIView+Views.swift"; sourceTree = "<group>"; };
+		6CB5B672294E65C300FECA02 /* RemoteWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeather.swift; sourceTree = "<group>"; };
+		6CB5B674294E687400FECA02 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		6CB5B676294E68C700FECA02 /* RemoteWeatherLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWeatherLoader.swift; sourceTree = "<group>"; };
+		6CB5B678294E7B5D00FECA02 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		6CB5B67A294E7BC600FECA02 /* URLSession+Sync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Sync.swift"; sourceTree = "<group>"; };
+		6CB5B67D294E7E5800FECA02 /* HTTPUrlResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPUrlResponse+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +132,8 @@
 		6CB5B61D294DF23D00FECA02 /* FlaireWeather */ = {
 			isa = PBXGroup;
 			children = (
+				6CB5B671294E65A600FECA02 /* API */,
 				6CB5B66A294E446D00FECA02 /* Helpers */,
-				6CB5B640294E257B00FECA02 /* CityWeatherPresentationAdapter.swift */,
 				6CB5B649294E394600FECA02 /* Presentation */,
 				6CB5B644294E38DF00FECA02 /* Model */,
 				6CB5B632294DF3EA00FECA02 /* View */,
@@ -130,7 +142,6 @@
 				6CB5B627294DF23E00FECA02 /* Assets.xcassets */,
 				6CB5B629294DF23E00FECA02 /* LaunchScreen.storyboard */,
 				6CB5B62C294DF23E00FECA02 /* Info.plist */,
-				6CB5B66D294E4F4300FECA02 /* CityWeatherUIComposer.swift */,
 			);
 			path = FlaireWeather;
 			sourceTree = "<group>";
@@ -203,7 +214,30 @@
 		6CB5B66A294E446D00FECA02 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6CB5B66D294E4F4300FECA02 /* CityWeatherUIComposer.swift */,
+				6CB5B640294E257B00FECA02 /* CityWeatherPresentationAdapter.swift */,
 				6CB5B66B294E448000FECA02 /* WeakRefVirtualProxy.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		6CB5B671294E65A600FECA02 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				6CB5B67C294E7E4200FECA02 /* Helpers */,
+				6CB5B672294E65C300FECA02 /* RemoteWeather.swift */,
+				6CB5B674294E687400FECA02 /* HTTPClient.swift */,
+				6CB5B676294E68C700FECA02 /* RemoteWeatherLoader.swift */,
+				6CB5B678294E7B5D00FECA02 /* URLSessionHTTPClient.swift */,
+				6CB5B67A294E7BC600FECA02 /* URLSession+Sync.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		6CB5B67C294E7E4200FECA02 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6CB5B67D294E7E5800FECA02 /* HTTPUrlResponse+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -309,16 +343,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CB5B63B294DFAF400FECA02 /* UIView+Extensions.swift in Sources */,
+				6CB5B675294E687400FECA02 /* HTTPClient.swift in Sources */,
 				6CB5B639294DF87200FECA02 /* CityWeatherUIView.swift in Sources */,
 				6CB5B655294E39F100FECA02 /* WeatherLoadingView.swift in Sources */,
 				6CB5B64F294E399D00FECA02 /* WeatherLoadingViewModel.swift in Sources */,
 				6CB5B648294E392400FECA02 /* WeatherLoader.swift in Sources */,
 				6CB5B64B294E395600FECA02 /* WeatherViewModel.swift in Sources */,
 				6CB5B657294E3A1F00FECA02 /* CityWeatherPresenter.swift in Sources */,
+				6CB5B679294E7B5D00FECA02 /* URLSessionHTTPClient.swift in Sources */,
 				6CB5B651294E39C700FECA02 /* WeatherView.swift in Sources */,
 				6CB5B623294DF23D00FECA02 /* CityWeatherViewController.swift in Sources */,
 				6CB5B61F294DF23D00FECA02 /* AppDelegate.swift in Sources */,
+				6CB5B677294E68C700FECA02 /* RemoteWeatherLoader.swift in Sources */,
+				6CB5B673294E65C300FECA02 /* RemoteWeather.swift in Sources */,
 				6CB5B63D294E144D00FECA02 /* CityWeatherUIView+ViewCode.swift in Sources */,
+				6CB5B67E294E7E5800FECA02 /* HTTPUrlResponse+Extensions.swift in Sources */,
+				6CB5B67B294E7BC600FECA02 /* URLSession+Sync.swift in Sources */,
 				6CB5B637294DF82B00FECA02 /* ViewCodeProtocol.swift in Sources */,
 				6CB5B653294E39DC00FECA02 /* WeatherErrorView.swift in Sources */,
 				6CB5B621294DF23D00FECA02 /* SceneDelegate.swift in Sources */,

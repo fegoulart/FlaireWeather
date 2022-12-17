@@ -57,9 +57,9 @@ public final class CityWeatherPresenter {
 
     func map(_ error: WeatherLoaderError) -> WeatherErrorViewModel {
         switch error {
-        case .networkError:
+        case .networkError, .invalidWeatherUrl:
             return WeatherErrorViewModel(message: "Could not fetch weather. Please try again later.")
-        case .invalidImageStateUrl:
+        case .invalidImageStateUrl, .invalidData:
             return WeatherErrorViewModel(message: "Invalid weather data")
         }
     }
