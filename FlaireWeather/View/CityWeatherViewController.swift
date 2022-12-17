@@ -11,6 +11,7 @@ import SwiftUI
 final class CityWeatherViewController: UIViewController {
 
     var selectedCityId: Int
+    var cityWeatherDelegate: CityWeatherDelegate?
 
     lazy var weatherView: CityWeatherUIView = {
         return CityWeatherUIView()
@@ -37,7 +38,7 @@ final class CityWeatherViewController: UIViewController {
 
     @objc
     func didPullToRefresh() {
-        print("didPullToRefresh")
+        cityWeatherDelegate?.didRequestWeather(for: selectedCityId)
     }
 }
 
