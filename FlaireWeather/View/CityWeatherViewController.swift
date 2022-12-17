@@ -8,11 +8,36 @@
 import UIKit
 import SwiftUI
 
-class CityWeatherViewController: UIViewController {
+final class CityWeatherViewController: UIViewController {
+
+    var selectedCityId: Int
+
+    lazy var weatherView: CityWeatherUIView = {
+        return CityWeatherUIView()
+    }()
+
+    var refreshControl: UIRefreshControl {
+        return weatherView.refreshControl
+    }
+
+    init(selectedCityId: Int = 4118) {
+        self.selectedCityId = selectedCityId
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = CityWeatherUIView()
+        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        view = weatherView
+    }
+
+    @objc
+    func didPullToRefresh() {
+        print("didPullToRefresh")
     }
 }
 
@@ -23,4 +48,3 @@ struct CityWeatherViewControllerPreviews: PreviewProvider {
         }
     }
 }
-

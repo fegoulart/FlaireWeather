@@ -14,6 +14,43 @@ final class CityWeatherUIView: UIView {
         return bounds.size.width
     }
 
+    var screenHeight: CGFloat? {
+        let bounds = UIScreen.main.bounds
+        return bounds.size.height
+    }
+
+    lazy var refreshControl: UIRefreshControl = {
+        let control = UIRefreshControl()
+        control.translatesAutoresizingMaskIntoConstraints = false
+        control.isUserInteractionEnabled = true
+        return control
+    }()
+
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.refreshControl = refreshControl
+        return view
+    }()
+
+    lazy var loadingView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .large)
+        view.stopAnimating()
+        view.hidesWhenStopped = true
+        return view
+    }()
+
+    lazy var errorViewLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Internet connection not available becaus an alien arrived in earth and then ate all cables and antennas"
+        label.numberOfLines = 2
+        label.font = .systemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        label.backgroundColor = .red
+        label.textColor = .white
+        return label
+    }()
+
     lazy var containerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
