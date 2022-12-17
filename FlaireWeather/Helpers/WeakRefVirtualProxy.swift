@@ -19,18 +19,24 @@ public final class WeakRefVirtualProxy<T: AnyObject> {
 
 extension WeakRefVirtualProxy: WeatherErrorView where T: WeatherErrorView {
     public func display(_ viewModel: WeatherErrorViewModel) {
-        object?.display(viewModel)
+        DispatchQueue.main.async {
+            self.object?.display(viewModel)
+        }
     }
 }
 
 extension WeakRefVirtualProxy: WeatherLoadingView where T: WeatherLoadingView {
     public func display(_ viewModel: WeatherLoadingViewModel) {
-        object?.display(viewModel)
+        DispatchQueue.main.async {
+            self.object?.display(viewModel)
+        }
     }
 }
 
 extension WeakRefVirtualProxy: WeatherView where T: WeatherView {
     public func display(_ viewModel: WeatherViewModel) {
-        object?.display(viewModel)
+        DispatchQueue.main.async {
+            self.object?.display(viewModel)
+        }
     }
 }
