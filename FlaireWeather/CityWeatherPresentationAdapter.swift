@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class CityWeatherPresentationAdapter: CityWeatherDelegate {
+final public class CityWeatherPresentationAdapter: CityWeatherDelegate {
 
     let cityWeatherPresenter: CityWeatherPresenter
     let weatherLoader: WeatherLoader
 
-    init(
+    public init(
         cityWeatherPresenter: CityWeatherPresenter,
         weatherLoader: WeatherLoader
     ) {
@@ -20,20 +20,16 @@ final class CityWeatherPresentationAdapter: CityWeatherDelegate {
         self.weatherLoader = weatherLoader
     }
 
-    func didRequestWeather(for cityId: Int) {
+    public func didRequestWeather(for cityId: Int) {
         cityWeatherPresenter.didStartLoading()
-        weatherLoader.fetchWeather(for: cityId) { result in
+        weatherLoader.fetchWeather(for: cityId) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let weather):
-                cityWeatherPresenter.didFinishLoading(with: weather)
+                self.cityWeatherPresenter.didFinishLoading(with: weather)
             case .failure(let error):
-                cityWeatherPresenter.didFinishLoading(with: error)
+                self.cityWeatherPresenter.didFinishLoading(with: error)
             }
         }
     }
-
-    deinit {
-        print("PRESENTATION ADAPTER MORREU")
-    }
-
 }

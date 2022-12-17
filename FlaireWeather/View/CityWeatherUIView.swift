@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CityWeatherUIView: UIView {
+public final class CityWeatherUIView: UIView {
 
     var screenWidth: CGFloat? {
         let bounds = UIScreen.main.bounds
@@ -19,12 +19,14 @@ final class CityWeatherUIView: UIView {
         return bounds.size.height
     }
 
-    lazy var refreshControl: UIRefreshControl = {
-        let control = UIRefreshControl()
-        control.translatesAutoresizingMaskIntoConstraints = false
-        control.isUserInteractionEnabled = true
-        return control
-    }()
+//    lazy var refreshControl: UIRefreshControl = {
+//        let control = UIRefreshControl()
+//        control.translatesAutoresizingMaskIntoConstraints = false
+//        control.isUserInteractionEnabled = true
+//        return control
+//    }()
+
+    var refreshControl: UIRefreshControl
 
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -118,7 +120,8 @@ final class CityWeatherUIView: UIView {
     }()
 
 
-    init() {
+    public init(refreshControl: UIRefreshControl) {
+        self.refreshControl = refreshControl
         super.init(frame: .zero)
         buildView()
     }
@@ -126,4 +129,5 @@ final class CityWeatherUIView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

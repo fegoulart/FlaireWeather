@@ -8,9 +8,9 @@
 import Foundation
 
 public final class CityWeatherPresenter {
-    let weatherView: WeatherView
-    let weatherErrorView: WeatherErrorView
-    let weatherLoadingView: WeatherLoadingView
+    var weatherView: WeatherView
+    var weatherErrorView: WeatherErrorView
+    var weatherLoadingView: WeatherLoadingView
 
     public init(
         weatherView: WeatherView,
@@ -62,9 +62,5 @@ public final class CityWeatherPresenter {
         case .invalidImageStateUrl:
             return WeatherErrorViewModel(message: "Invalid weather data")
         }
-    }
-
-    deinit {
-        print("PRESENTER MORREU")
     }
 }

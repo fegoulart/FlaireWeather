@@ -8,21 +8,17 @@
 import UIKit
 import SwiftUI
 
-final class CityWeatherViewController: UIViewController {
+public final class CityWeatherViewController: UIViewController {
 
     var selectedCityId: Int
-    var cityWeatherDelegate: CityWeatherDelegate?
+    public var weatherView: CityWeatherUIView
+    public var refreshControl: CityWeatherRefreshControl
 
-    lazy var weatherView: CityWeatherUIView = {
-        return CityWeatherUIView()
-    }()
-
-    var refreshControl: UIRefreshControl {
-        return weatherView.refreshControl
-    }
-
-    init(selectedCityId: Int = 4118) {
+    public init(selectedCityId: Int = 4118, refreshControl: CityWeatherRefreshControl = CityWeatherRefreshControl()) {
         self.selectedCityId = selectedCityId
+        self.refreshControl = refreshControl
+        refreshControl.selectedCityId = selectedCityId
+        self.weatherView = CityWeatherUIView(refreshControl: refreshControl)
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,15 +26,40 @@ final class CityWeatherViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
-        refreshControl.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         view = weatherView
+        refreshControl.didPullToRefresh()
+    }
+}
+
+
+public final class CityWeatherRefreshControl: UIRefreshControl, WeatherLoadingView {
+
+    public var selectedCityId: Int = -1
+    var delegate: CityWeatherDelegate?
+
+    public func display(_ viewModel: WeatherLoadingViewModel) {
+        switch viewModel.isLoading {
+        case true:
+            self.beginRefreshing()
+        case false:
+            self.endRefreshing()
+        }
+    }
+
+    override public init() {
+        super.init()
+        self.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     @objc
     func didPullToRefresh() {
-        cityWeatherDelegate?.didRequestWeather(for: selectedCityId)
+        delegate?.didRequestWeather(for: selectedCityId)
     }
 }
 

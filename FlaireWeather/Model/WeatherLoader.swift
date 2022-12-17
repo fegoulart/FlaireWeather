@@ -12,12 +12,15 @@ public enum WeatherLoaderError: Error {
     case invalidImageStateUrl
 }
 
-protocol WeatherLoader {
-    func fetchWeather(for cityId: Int, completion: (Result<CityWeather, WeatherLoaderError>) -> Void)
+public protocol WeatherLoader {
+    func fetchWeather(for cityId: Int, completion: @escaping (Result<CityWeather, WeatherLoaderError>) -> Void)
 }
 
-final class RemoteWeatherLoader: WeatherLoader {
-    func fetchWeather(for cityId: Int, completion: (Result<CityWeather, WeatherLoaderError>) -> Void) {
+public final class RemoteWeatherLoader: WeatherLoader {
+
+    public init() {}
+
+    public func fetchWeather(for cityId: Int, completion: (Result<CityWeather, WeatherLoaderError>) -> Void) {
         let weather = CityWeather(
             cityName: "Rio de Janeiro",
             temperature: 40,

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol CityWeatherDelegate: AnyObject {
+public protocol CityWeatherDelegate: AnyObject {
     func didRequestWeather(for cityId: Int)
 }
