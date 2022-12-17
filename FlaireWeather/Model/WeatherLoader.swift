@@ -7,8 +7,9 @@
 
 import Foundation
 
-enum WeatherLoaderError: Error {
+public enum WeatherLoaderError: Error {
     case networkError
+    case invalidImageStateUrl
 }
 
 protocol WeatherLoader {

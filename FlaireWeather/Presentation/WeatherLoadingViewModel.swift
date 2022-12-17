@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct WeatherLoadingViewModel {
-    let isLoading: Bool
+public struct WeatherLoadingViewModel {
+    public let isLoading: Bool
 }

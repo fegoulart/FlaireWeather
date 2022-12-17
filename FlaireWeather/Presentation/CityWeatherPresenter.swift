@@ -7,12 +7,12 @@
 
 import Foundation
 
-final class CityWeatherPresenter {
+public final class CityWeatherPresenter {
     let weatherView: WeatherView
     let weatherErrorView: WeatherErrorView
     let weatherLoadingView: WeatherLoadingView
 
-    init(
+    public init(
         weatherView: WeatherView,
         weatherErrorView: WeatherErrorView,
         weatherLoadingView: WeatherLoadingView
@@ -22,28 +22,36 @@ final class CityWeatherPresenter {
         self.weatherLoadingView = weatherLoadingView
     }
 
-    func didStartLoading() {
+    public func didStartLoading() {
         weatherErrorView.display(.noError)
         weatherLoadingView.display(WeatherLoadingViewModel(isLoading: true))
     }
 
-    func didFinishLoading(with weather: CityWeather) {
+    public func didFinishLoading(with weather: CityWeather) {
         weatherLoadingView.display(WeatherLoadingViewModel(isLoading: false))
-        weatherView.display(map(weather))
+        do {
+            weatherView.display(try map(weather))
+        } catch {
+
+        }
     }
 
-    func didFinishLoading(with error: WeatherLoaderError) {
+    public func didFinishLoading(with error: WeatherLoaderError) {
         weatherLoadingView.display(WeatherLoadingViewModel(isLoading: false))
         weatherErrorView.display(map(error))
     }
 
-    func map(_ weather: CityWeather) -> WeatherViewModel {
+    func map(_ weather: CityWeather) throws -> WeatherViewModel {
+        guard let stateUrl: URL = URL(string: weather.stateImgUrl) else {
+            throw WeatherLoaderError.invalidImageStateUrl
+        }
+
         return WeatherViewModel(
-            city: "São Paulo",
-            temperature: "25º",
-            minMax: "L: 20º H: 27º",
-            state: "Light Cloud",
-            stateImgUrl: URL(string: "https://cdn.faire.com/static/mobile-take-home/icons/lc.png")!
+            city: weather.cityName,
+            temperature: "\(weather.temperature)º",
+            minMax: "L: \(weather.minimum)º H: \(weather.maximum)º",
+            state: weather.state,
+            stateImgUrl: stateUrl
         )
     }
 
@@ -51,6 +59,8 @@ final class CityWeatherPresenter {
         switch error {
         case .networkError:
             return WeatherErrorViewModel(message: "Could not fetch weather. Please try again later.")
+        case .invalidImageStateUrl:
+            return WeatherErrorViewModel(message: "Invalid weather data")
         }
     }
 

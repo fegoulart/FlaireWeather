@@ -7,10 +7,18 @@
 
 import Foundation
 
-struct WeatherViewModel {
-    let city: String
-    let temperature: String
-    let minMax: String
-    let state: String
-    let stateImgUrl: URL
+public struct WeatherViewModel: Hashable {
+    public let city: String
+    public let temperature: String
+    public let minMax: String
+    public let state: String
+    public let stateImgUrl: URL
+
+    public init(city: String, temperature: String, minMax: String, state: String, stateImgUrl: URL) {
+        self.city = city
+        self.temperature = temperature
+        self.minMax = minMax
+        self.state = state
+        self.stateImgUrl = stateImgUrl
+    }
 }

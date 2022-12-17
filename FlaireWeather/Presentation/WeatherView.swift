@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol WeatherView {
+public protocol WeatherView {
     func display(_ viewModel: WeatherViewModel)
 }

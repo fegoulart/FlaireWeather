@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct WeatherErrorViewModel {
-    let message: String?
+public struct WeatherErrorViewModel {
+    public let message: String?
 
     static var noError: WeatherErrorViewModel {
         return WeatherErrorViewModel(message: nil)
