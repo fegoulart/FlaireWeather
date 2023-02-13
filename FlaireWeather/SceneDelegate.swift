@@ -7,9 +7,9 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+public class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    public var window: UIWindow?
     let url = "https://cdn.faire.com/static/mobile-take-home"
 
     private lazy var httpClient: HTTPClient = {
@@ -17,28 +17,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
 
     lazy var navigationController =  {
-        return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient)))
+        // return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient)))
+        return UINavigationController(rootViewController: CityWeatherUIComposer.citiesTableComposedWith(weatherLoader: MockedWeatherLoader(), delegate: self))
     }()
 
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    public func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
+    public func sceneDidDisconnect(_ scene: UIScene) {
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
+    public func sceneDidBecomeActive(_ scene: UIScene) {
     }
 
-    func sceneWillResignActive(_ scene: UIScene) {
+    public func sceneWillResignActive(_ scene: UIScene) {
     }
 
-    func sceneWillEnterForeground(_ scene: UIScene) {
+    public func sceneWillEnterForeground(_ scene: UIScene) {
     }
 
-    func sceneDidEnterBackground(_ scene: UIScene) {
+    public func sceneDidEnterBackground(_ scene: UIScene) {
+    }
+}
+
+extension SceneDelegate: CitiesTableDelegate {
+    public func didSelect(woeid: Int) {
+        let detailView = CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient))
+        navigationController.pushViewController(detailView, animated: true)
     }
 }

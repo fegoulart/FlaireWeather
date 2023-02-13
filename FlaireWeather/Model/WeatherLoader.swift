@@ -21,5 +21,17 @@ public protocol WeatherLoaderTask {
 public protocol WeatherLoader {
     typealias Result = Swift.Result<CityWeather, WeatherLoaderError>
 
+    @discardableResult
     func fetchWeather(for cityId: Int, completion: @escaping (Result) -> Void) -> WeatherLoaderTask?
+}
+
+public protocol WorldWeatherLoader {
+    typealias Result = Swift.Result<WeatherListData, WeatherLoaderError>
+    typealias WeatherListData = [(String, [CityWeather])]
+
+    @discardableResult
+    func fetchWeather(completion: @escaping (Result) -> Void) -> WeatherLoaderTask?
+
+    @discardableResult
+    func fetchMoreWeather(completion: @escaping (Result) -> Void) -> WeatherLoaderTask?
 }

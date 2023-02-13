@@ -40,3 +40,11 @@ extension WeakRefVirtualProxy: WeatherView where T: WeatherView {
         }
     }
 }
+
+extension WeakRefVirtualProxy: CitiesTableDelegate where T:CitiesTableDelegate {
+    public func didSelect(woeid: Int) {
+        DispatchQueue.main.async {
+            self.object?.didSelect(woeid: woeid)
+        }
+    }
+}
