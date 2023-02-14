@@ -136,6 +136,9 @@ extension CitiesTableViewController:  UITableViewDataSourcePrefetching {
                 }
             }
         }
+        // Kingfisher image prefetcher
+//        let urls = indexPaths.flatMap { URL(string: $0.urlString) }
+//                ImagePrefetcher(urls: urls).start()
     }
 
     public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
