@@ -11,6 +11,7 @@ import SwiftUI
 public final class CityWeatherViewController: UIViewController, SkeletonDisplayable {
 
     var selectedCityId: Int
+    weak var delegate: CityForecastDelegate?
     public var weatherView: CityWeatherUIView
     public var refreshControl: CityWeatherRefreshControl
 
@@ -31,6 +32,12 @@ public final class CityWeatherViewController: UIViewController, SkeletonDisplaya
         view = weatherView
         showSkeleton()
         refreshControl.didPullToRefresh()
+        weatherView.forecastButton.addTarget(self, action: #selector(didRequestForecast), for: .allEvents)
+    }
+
+    @objc
+    func didRequestForecast() {
+        delegate?.didRequestForecast(for: selectedCityId)
     }
 }
 

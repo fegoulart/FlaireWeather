@@ -112,6 +112,14 @@ public final class CityWeatherUIView: UIView {
         return label
     }()
 
+    lazy var forecastButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Forecast", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = false
+        button.backgroundColor = UIColor.red
+        return button
+    }()
 
     public init(refreshControl: UIRefreshControl) {
         self.refreshControl = refreshControl

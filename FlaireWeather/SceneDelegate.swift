@@ -17,7 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }()
 
     lazy var navigationController =  {
-        return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient)))
+        return UINavigationController(rootViewController: CityWeatherUIComposer.cityWeatherComposedWith(weatherLoader: RemoteWeatherLoader(baseUrl: url, client: httpClient),                                                                                             navigateToForecast: { forecast in
+            let forecastViewController = ForecastViewController()
+            self.navigationController.present(forecastViewController, animated: false)
+        }))
     }()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

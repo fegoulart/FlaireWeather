@@ -69,3 +69,30 @@ extension RemoteWeather {
         return remoteWeather.consolidatedWeather.randomElement()
     }
 }
+
+extension RemoteWeather {
+    public static func mapForecast(_ data: Data, from response: HTTPURLResponse) throws -> RemoteWeather {
+        guard response.isOK, let weather = try? JSONDecoder().decode(RemoteWeather.self, from: data) else {
+            throw WeatherLoaderError.invalidData
+        }
+        return weather
+    }
+
+    public static func mapForecast(_ remoteWeather: RemoteWeather) throws -> [CityWeather] {
+        guard !remoteWeather.consolidatedWeather.isEmpty else { throw WeatherLoaderError.invalidData }
+        var result: [CityWeather] = []
+        for i in 1..<remoteWeather.consolidatedWeather.count {
+            let currentWeather = remoteWeather.consolidatedWeather[i]
+            let newCityWeather = CityWeather(
+                cityName: remoteWeather.location,
+                temperature: Int(round(currentWeather.temperature)),
+                minimum: Int(round(currentWeather.min)),
+                maximum: Int(round(currentWeather.max)),
+                state: currentWeather.state,
+                stateImgUrl: "https://cdn.faire.com/static/mobile-take-home/icons/\(currentWeather.stateId).png"
+            )
+            result.append(newCityWeather)
+        }
+        return result
+    }
+}

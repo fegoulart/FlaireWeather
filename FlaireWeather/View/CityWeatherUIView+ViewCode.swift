@@ -18,6 +18,7 @@ extension CityWeatherUIView: ViewCodeProtocol {
         temperatureContainer.addArrangedSubview(temperature)
         containerStackView.addArrangedSubview(statusUILabel)
         containerStackView.addArrangedSubview(lowHighUILabel)
+        scrollView.addSubview(forecastButton)
     }
 
     func setupConstraints() {
@@ -82,6 +83,14 @@ extension CityWeatherUIView: ViewCodeProtocol {
             [
                 view.leadingAnchor.constraint(lessThanOrEqualTo: weatherStatus.leadingAnchor),
                 view.trailingAnchor.constraint(greaterThanOrEqualTo: temperature.trailingAnchor)
+            ]
+        }
+
+        forecastButton.constraint { view in
+            [
+                view.heightAnchor.constraint(equalToConstant: 30),
+                view.widthAnchor.constraint(equalToConstant: 50),
+                view.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
             ]
         }
     }

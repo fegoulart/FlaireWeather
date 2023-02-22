@@ -10,3 +10,7 @@ import Foundation
 public protocol CityWeatherDelegate: AnyObject {
     func didRequestWeather(for cityId: Int)
 }
+
+public protocol CityForecastDelegate: AnyObject {
+    func didRequestForecast(for cityId: Int)
+}
